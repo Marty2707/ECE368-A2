@@ -64,6 +64,7 @@ void closewindow(int windownum, Node_t** a_head)
     }
     else if ((*a_head)->next == NULL) //work on it
     {
+        printf("%d\n", (*a_head)->window);
         free(*a_head);
         *a_head = NULL;
         return;
@@ -77,6 +78,7 @@ void closewindow(int windownum, Node_t** a_head)
         dummy = (*a_head)->next;
         free(*a_head);
         *a_head = dummy;
+        printf("%d\n", (*a_head)->window);
         return;
     }
 
