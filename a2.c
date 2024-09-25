@@ -9,17 +9,17 @@ typedef struct _Node_t
     
 } Node_t;
 
-static void printlist(Node_t* a_head)
-{
-    Node_t* current = a_head;
+// static void printlist(Node_t* a_head)
+// {
+//     Node_t* current = a_head;
 
-    while(current != NULL)
-    {
-        printf("| %d | -> ", current->window);
-        current = current->next;
-    }
-    printf("NULL\n\n");
-}
+//     while(current != NULL)
+//     {
+//         printf("| %d | -> ", current->window);
+//         current = current->next;
+//     }
+//     printf("NULL\n\n");
+// }
 
 void openwindow(int windownum, Node_t** a_head)
 {
@@ -73,8 +73,10 @@ void closewindow(int windownum, Node_t** a_head)
 
     if ((*a_head) -> window == windownum)
     {
-        (*a_head) -> next = prev->next;
-        free(dummy);
+        dummy = (*a_head)->next;
+        free(*a_head);
+        *a_head = dummy;
+        return;
     }
 
     while(windownum != curr -> window)
@@ -110,7 +112,14 @@ int main()
         {
             closewindow(windownum, &head);
         }
-        printlist(head);
+        //printlist(head);
+
+        if (head == NULL)
+        {
+            break;
+        }
+        
     }
+    return 0;
 }
 
