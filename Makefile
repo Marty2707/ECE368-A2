@@ -2,11 +2,11 @@ WARNING = -Wall -Wshadow --pedantic
 ERROR = -Wvla -Werror
 GCC = gcc -std=c99 -g $(WARNING) $(ERROR)
 
-a2: a2.o
-	$(GCC) a2.o -o a2
+a4: a4.o
+	$(GCC) a4.o -o a4
 
-a2.o: a2.c
-	$(GCC) -c a2.c -o a2.o
+a4.o: a4.c
+	$(GCC) -c a4.c -o a4.o
 
 clean:
-	rm -f *.o a2 
+	rm -f *.o a4 
