@@ -40,6 +40,7 @@ void switchwindow(int windownum, Node_t** a_head)
 
     else if ((*a_head)->next == NULL)
     {
+        printf("%d\n", windownum);
         return;
     }
     Node_t* curr = (*a_head)->next;
