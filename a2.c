@@ -2,17 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct node
+typedef struct _Node_t
 {
-    struct node* next;
+    struct _Node_t* next;
     int window;
     
-};
+} Node_t;
 
-
-void openwindow(int windownum, struct node** a_head)
+static void printlist(Node_t* a_head)
 {
-    struct node* new = malloc(sizeof(struct node));
+    Node_t* current = a_head;
+
+    while(current != NULL)
+    {
+        printf("| %d | -> ", current->window);
+        current = current->next;
+    }
+    printf("NULL\n\n");
+}
+
+void openwindow(int windownum, Node_t** a_head)
+{
+    Node_t* new = malloc(sizeof(Node_t));
     new->window = windownum;
     new->next = *a_head;
     *a_head = new;
@@ -20,7 +31,7 @@ void openwindow(int windownum, struct node** a_head)
 }
 
 
-void switchwindow(int windownum, struct node** a_head)
+void switchwindow(int windownum, Node_t** a_head)
 {
     if(*a_head == NULL)
     {
@@ -31,8 +42,8 @@ void switchwindow(int windownum, struct node** a_head)
     {
         return;
     }
-    struct node* curr = (*a_head)->next;
-    struct node* prev = *a_head;
+    Node_t* curr = (*a_head)->next;
+    Node_t* prev = *a_head;
     while(windownum != curr -> window)
     {
         curr = curr->next;
@@ -44,7 +55,7 @@ void switchwindow(int windownum, struct node** a_head)
     printf("%d\n", windownum);
 }
 
-void closewindow(int windownum, struct node** a_head)
+void closewindow(int windownum, Node_t** a_head)
 {
     if(*a_head == NULL)
     {
@@ -52,11 +63,13 @@ void closewindow(int windownum, struct node** a_head)
     }
     else if ((*a_head)->next == NULL) //work on it
     {
+        free(*a_head);
+        *a_head = NULL;
         return;
     }
-    struct node* prev = *a_head;
-    struct node* dummy = *a_head;
-    struct node* curr = (*a_head)->next;
+    Node_t* prev = *a_head;
+    Node_t* dummy = *a_head;
+    Node_t* curr = (*a_head)->next;
 
     if ((*a_head) -> window == windownum)
     {
@@ -81,7 +94,7 @@ int main()
     int windownum;
     char instruct[7];
     
-    struct node* head = NULL;
+    Node_t* head = NULL;
 
     while (scanf("%s %d", instruct, &windownum))
     { 
@@ -97,6 +110,7 @@ int main()
         {
             closewindow(windownum, &head);
         }
+        printlist(head);
     }
 }
 
