@@ -38,11 +38,12 @@ void switchwindow(int windownum, Node_t** a_head)
         return;
     }
 
-    else if ((*a_head)->next == NULL)
+    else if ((*a_head)->window == windownum)
     {
         printf("%d\n", windownum);
         return;
     }
+
     Node_t* curr = (*a_head)->next;
     Node_t* prev = *a_head;
     while(windownum != curr -> window)
